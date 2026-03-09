@@ -10,7 +10,7 @@ Permissions, MCP 서버, 범용 스킬, AI 협업 규칙을 한 번에 설치.
 |------|------|
 | **Permissions** | `bypassPermissions` 등 3단계 프리셋 (power/balanced/safe) |
 | **MCP Servers** | context7, playwright, sequential-thinking, github, firebase |
-| **Skills** | pdf, docx, pptx, mermaid, error-tracking 등 범용 스킬 |
+| **Skills** | pdf, docx, mermaid, error-tracking 등 범용 스킬 + `/cc:` 워크플로우 스킬 |
 | **Rules** | AI 협업 규칙, 보안 코딩, Git 워크플로우 |
 
 ### SuperClaude Framework
@@ -127,6 +127,27 @@ OWASP 기반 언어 무관 보안 규칙 (SQL Injection, XSS, CSRF 등)
 
 브랜치 전략, 커밋 컨벤션, 세션 시작 체크리스트
 
+## /cc: 워크플로우 스킬
+
+설치 후 Claude Code에서 `/cc:` 접두사로 사용 가능한 워크플로우 스킬.
+
+### 유틸리티
+
+| 스킬 | 용도 |
+|------|------|
+| `/cc:깃` | git 상태 자동 판단 → 동기화/커밋/배포 실행 |
+| `/cc:병렬` | 작업 복잡도 판단 → 단일 실행 or 병렬 지시서 생성 |
+| `/cc:머지` | 병렬 작업 보고서 확인 → 충돌 분석 → 머지 |
+
+### 코드 리뷰 (번호순 = 미시→거시)
+
+| 스킬 | 용도 |
+|------|------|
+| `/cc:1보안점검` | OWASP/CWE 기준 보안 취약점 스캔 + 리포트 |
+| `/cc:2규칙리뷰` | 프로젝트 CLAUDE.md + 린터 기준 코딩 규칙 점검 (100점) |
+| `/cc:3로직리뷰` | 비즈니스 로직, 엣지케이스, N+1, Race Condition 리뷰 |
+| `/cc:4아키텍처리뷰` | 설계/성능/확장성/의존성/운영 아키텍처 리뷰 (100점) |
+
 ## 파일 구조
 
 ```
@@ -143,6 +164,14 @@ claude-starter-kit/
 │   ├── security-coding.md
 │   └── git-workflow.md
 └── skills/                # 범용 스킬
+    ├── cc/                # /cc: 워크플로우 스킬
+    │   ├── 깃.md
+    │   ├── 1보안점검.md
+    │   ├── 2규칙리뷰.md
+    │   ├── 3로직리뷰.md
+    │   ├── 4아키텍처리뷰.md
+    │   ├── 병렬.md
+    │   └── 머지.md
     ├── pdf/
     ├── docx/
     ├── mermaid/
